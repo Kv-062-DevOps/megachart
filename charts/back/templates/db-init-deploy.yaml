@@ -15,6 +15,7 @@ spec:
       - name: {{ .Values.secretFile }}
       containers:
       - image: "{{ .Values.registry }}:{{ .Values.tag }}"
+        imagePullPolicy: Always
         ports:
           - containerPort: {{ .Values.host_port }}
             protocol: TCP
