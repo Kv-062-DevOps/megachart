@@ -26,19 +26,4 @@ spec:
             - name: "BACKPORT"
               value: "{{ .Values.BACKPORT }}"
             - name: "BACKADDR"
-              value: "{{ .Values.BACKADDR }}"
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-
+              value: "{{ .Release.Name }}-{{ .Values.BACKADDR }}"

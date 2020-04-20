@@ -12,3 +12,6 @@ dependencies:
   - name: grafana
     version: "5.0.*"
     repository: https://kubernetes-charts.storage.googleapis.com/
+  - name: registry-creds
+    version: "1.1.*"
+    repository: https://kir4h.github.io/charts/

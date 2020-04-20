@@ -18,8 +18,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           env:
             - name: "URL_GET"
-              value: {{ .Values.URL_GET }}
+              value: "{{ .Release.Name }}-{{ .Values.URL_GET }}"
             - name: "URL_POST"
-              value: {{ .Values.URL_POST }}
+              value: "{{ .Release.Name }}-{{ .Values.URL_POST }}"
       imagePullSecrets:
       - name: {{ .Values.image.imagePullSecrets }}
