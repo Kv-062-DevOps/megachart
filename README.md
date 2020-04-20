@@ -4,7 +4,6 @@ Megachart to deploy all our not megacharts
 First of all, you need to update your dependencies. This can be done by calling 
 ```
 helm dep update
-
 ```
 
 Make sure, that you have done all the instructions from ecr.md.
