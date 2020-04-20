@@ -19,6 +19,7 @@ spec:
           ports:
             - containerPort: {{ .Values.image.HOST_PORT }}
               protocol: TCP
+              name: http
           env:
             - name: "HOST_PORT"
               value: "{{ .Values.image.HOST_PORT }}"

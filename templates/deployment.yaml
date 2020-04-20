@@ -16,6 +16,10 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
           env:
             - name: "URL_GET"
               value: "{{ .Release.Name }}-{{ .Values.URL_GET }}"
