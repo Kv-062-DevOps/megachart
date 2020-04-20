@@ -1,5 +1,3 @@
-replicaCount: 1
-
 image:
   repository: 074368059797.dkr.ecr.eu-central-1.amazonaws.com/front
   tag: latest
@@ -16,22 +14,25 @@ URL_POST: post-srv:8082/a
 ##### PROMETHEUS #####
 prometheus:
   alertmanager:
-        enabled: true
-        persistentVolume:
-            enabled: false
+    enabled: false
+    persistentVolume:
+      enabled: false
 
   server:
     global:
-        scrape_interval: 30s
-        scrape_timeout: 30s
-        evaluation_interval: 1m
-
+      scrape_interval: 30s
+      scrape_timeout: 30s
+      evaluation_interval: 1m
+    persistentVolume:
+      enabled: false
+          
+  extraScrapeConfigs:
 
 ##### Grafana #####
 grafana:
 
     persistence:
-        ebabled: false
+        enabled: false
 
     adminUser: admin
     adminPassdword:
