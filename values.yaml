@@ -25,7 +25,12 @@ prometheus:
       evaluation_interval: 1m
     persistentVolume:
       enabled: false
-          
+
+  pushgateway:
+    enabled: false
+    persistentVolume:
+      enabled: false
+
   extraScrapeConfigs:
 
 ##### Grafana #####
