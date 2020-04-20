@@ -4,3 +4,11 @@ description: Flask web application
 type: application
 version: 0.1.0
 appVersion: latest
+
+dependencies:
+  - name: prometheus
+    version: "11.1.*"
+    repository: https://kubernetes-charts.storage.googleapis.com/
+  - name: grafana
+    version: "5.0.*"
+    repository: https://kubernetes-charts.storage.googleapis.com/
