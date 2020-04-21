@@ -21,7 +21,8 @@ helm install test . \
 --set back.secret_key="secret-key-of-user-who-can-access-dynamodb" \
 --set back.region="region-of-dynamodb" \
 --set grafana.adminPassword="grafana-admin-password" \
---set-file prometheus.extraScrapeConfigs=extraScrapeConfigs.yaml
+--set-file prometheus.extraScrapeConfigs=extraScrapeConfigs.yaml \
+--set-file grafana.dashboards.default.Demo-Dashboard.json=dashboard.json
 ```
 
 Congratulations! 
