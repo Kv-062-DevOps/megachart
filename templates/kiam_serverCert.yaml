@@ -1,0 +1,17 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: kiam-server
+  namespace: kube-system
+spec:
+  secretName: kiam-server-tls
+  issuerRef:
+    name: kiam-ca-issuer
+    kind: ClusterIssuer
+  commonName: kiam
+  dnsNames:
+  - kiam-server
+  - kiam-server:443
+  - localhost
+  - localhost:443
+  - localhost:9610

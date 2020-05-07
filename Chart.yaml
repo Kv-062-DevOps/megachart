@@ -15,3 +15,9 @@ dependencies:
   - name: registry-creds
     version: "1.1.*"
     repository: https://kir4h.github.io/charts/
+  # - name: kiam
+  #   version: "5.7.*"
+  #   repository: https://uswitch.github.io/kiam-helm-charts/charts/
+  # - name: cert-manager
+  #   version: "0.15.*"
+  #   repository: https://charts.jetstack.io/
