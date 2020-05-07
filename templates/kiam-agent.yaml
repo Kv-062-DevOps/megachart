@@ -1,0 +1,70 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  namespace: kube-system
+  name: kiam-agent
+spec:
+  template:
+    metadata:
+      labels:
+        app: kiam
+        role: agent
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      nodeSelector:
+        kubernetes.io/role: node
+      # nodeName: ip-172-20-40-176.eu-west-2.compute.internal
+      # tolerations:
+      #   - key: kiam
+      #     value: kiam
+      #     effect: NoSchedule
+      volumes:
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+        - name: tls
+          secret:
+            secretName: kiam-agent-tls
+        - name: xtables
+          hostPath:
+            path: /run/xtables.lock
+            type: FileOrCreate
+      containers:
+        - name: kiam
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
+          image: quay.io/uswitch/kiam:6e07571932910d71a8d99a7b4dd0325e09baf9b4
+          imagePullPolicy: Always
+          command:
+            - /kiam
+          args:
+            - agent
+            - --iptables
+            - --host-interface=cali+
+            - --json-log
+            - --port=8181
+            - --cert=/etc/kiam/tls/agent.pem
+            - --key=/etc/kiam/tls/agent-key.pem
+            - --ca=/etc/kiam/tls/ca.pem
+            - --server-address=kiam-server:443
+            - --gateway-timeout-creation=1s
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          volumeMounts:
+            - mountPath: /etc/ssl/certs
+              name: ssl-certs
+            - mountPath: /etc/kiam/tls
+              name: tls
+            - mountPath: /var/run/xtables.lock
+              name: xtables
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8181
+            initialDelaySeconds: 3
+            periodSeconds: 3

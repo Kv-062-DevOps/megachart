@@ -10,6 +10,9 @@ spec:
     metadata:
       labels:
         {{- include "back.selectorLabels" . | nindent 8 }}
+      annotations:
+        iam.amazonaws.com/role: arn:aws:iam::520795059397:role/kiam_agent_ecr
+        iam.amazonaws.com/role: arn:aws:iam::520795059397:role/kiam_agent_dynamodb
     spec:
       imagePullSecrets:
       - name: {{ .Values.secretFile }}
