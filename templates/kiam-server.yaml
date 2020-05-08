@@ -1,11 +1,14 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   namespace: kube-system
   name: kiam-server
 spec:
-  updateStrategy:
-    type: RollingUpdate
+  selector:
+    matchLabels:
+      name: kiam
+  # updateStrategy:
+  #   type: RollingUpdate
   template:
     metadata:
       labels:
@@ -27,7 +30,7 @@ spec:
             secretName: kiam-server-tls
       containers:
         - name: kiam
-          image: quay.io/uswitch/kiam:6e07571932910d71a8d99a7b4dd0325e09baf9b4
+          image: quay.io/uswitch/kiam:{{ .Values.global.kiam_sha_version }}
           imagePullPolicy: Always
           command:
             - /kiam
@@ -39,7 +42,7 @@ spec:
             - --key=/etc/kiam/tls/tls.key
             - --ca=/etc/kiam/tls/ca.crt
             - --role-base-arn-autodetect
-            - --assume-role-arn=arn:aws:iam::520795059397:role/kiam_server
+            - --assume-role-arn={{ .Values.global.kiam_server }}
             - --sync=1m
           volumeMounts:
             - mountPath: /etc/ssl/certs

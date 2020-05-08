@@ -1,9 +1,12 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   namespace: kube-system
   name: kiam-agent
 spec:
+  selector:
+    matchLabels:
+      name: kiam
   template:
     metadata:
       labels:
@@ -35,7 +38,7 @@ spec:
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
-          image: quay.io/uswitch/kiam:6e07571932910d71a8d99a7b4dd0325e09baf9b4
+          image: quay.io/uswitch/kiam:{{ .Values.global.kiam_sha_version }}
           imagePullPolicy: Always
           command:
             - /kiam

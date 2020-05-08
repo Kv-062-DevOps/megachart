@@ -11,6 +11,12 @@ service:
 URL_GET: get-srv:8081
 URL_POST: post-srv:8082/a
 
+global:
+  kiam_server: arn:aws:iam::520795059397:role/kiam_server
+  kiam_agent_ecr: arn:aws:iam::520795059397:role/kiam_agent_ecr
+  kiam_agent_dynamodb: arn:aws:iam::520795059397:role/kiam_agent_dynamodb
+  kiam_sha_version: 6e07571932910d71a8d99a7b4dd0325e09baf9b4
+
 ##### PROMETHEUS #####
 prometheus:
   alertmanager:
