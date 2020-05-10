@@ -2,3 +2,6 @@
 *.lock
 *.crt
 *.key
+.vscode/
+*.tfstate
+.terraform/
